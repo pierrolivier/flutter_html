@@ -847,44 +847,51 @@ class HtmlRichTextParser extends StatelessWidget {
                     onError: onImageError ?? (_, __) {},
                   );
                   parseContext.rootWidgetList.add(GestureDetector(
-                    child: Image.network(
-                      node.attributes['src'],
-                      frameBuilder: (context, child, frame, _) {
-                        if (node.attributes['alt'] != null && frame == null) {
-                          return BlockText(
-                            child: RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                text: node.attributes['alt'],
-                                style: nextContext.childStyle,
+                    child: Padding(
+                      padding: _customEdgeInsets ??
+                      EdgeInsets.only(
+                          top: 8.0,
+                          bottom: 8.0,
+                          left: parseContext.indentLevel * indentSize),
+                      child: Image.network(
+                        node.attributes['src'],
+                        frameBuilder: (context, child, frame, _) {
+                          if (node.attributes['alt'] != null && frame == null) {
+                            return BlockText(
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  text: node.attributes['alt'],
+                                  style: nextContext.childStyle,
+                                ),
                               ),
-                            ),
-                            shrinkToFit: shrinkToFit,
-                          );
-                        }
-                        if (frame != null) {
-                          return child;
-                        }
-                        return Container();
-                      },
-                      width: (width ?? -1) > 0 ? width : null,
-                      height: (height ?? -1) > 0 ? height : null,
-                      scale: imageProperties?.scale ?? 1.0,
-                      matchTextDirection:
-                          imageProperties?.matchTextDirection ?? false,
-                      centerSlice: imageProperties?.centerSlice,
-                      filterQuality:
-                          imageProperties?.filterQuality ?? FilterQuality.low,
-                      alignment: imageProperties?.alignment ?? Alignment.center,
-                      colorBlendMode: imageProperties?.colorBlendMode,
-                      fit: imageProperties?.fit,
-                      color: imageProperties?.color,
-                      repeat: imageProperties?.repeat ?? ImageRepeat.noRepeat,
-                      semanticLabel: imageProperties?.semanticLabel,
-                      excludeFromSemantics:
-                          (imageProperties?.semanticLabel == null)
-                              ? true
-                              : false,
+                              shrinkToFit: shrinkToFit,
+                            );
+                          }
+                          if (frame != null) {
+                            return child;
+                          }
+                          return Container();
+                        },
+                        width: (width ?? -1) > 0 ? width : null,
+                        height: (height ?? -1) > 0 ? height : null,
+                        scale: imageProperties?.scale ?? 1.0,
+                        matchTextDirection:
+                            imageProperties?.matchTextDirection ?? false,
+                        centerSlice: imageProperties?.centerSlice,
+                        filterQuality:
+                            imageProperties?.filterQuality ?? FilterQuality.low,
+                        alignment: imageProperties?.alignment ?? Alignment.center,
+                        colorBlendMode: imageProperties?.colorBlendMode,
+                        fit: imageProperties?.fit,
+                        color: imageProperties?.color,
+                        repeat: imageProperties?.repeat ?? ImageRepeat.noRepeat,
+                        semanticLabel: imageProperties?.semanticLabel,
+                        excludeFromSemantics:
+                            (imageProperties?.semanticLabel == null)
+                                ? true
+                                : false,
+                      ),
                     ),
                     onTap: () {
                       if (onImageTap != null) {
@@ -925,31 +932,37 @@ class HtmlRichTextParser extends StatelessWidget {
             break;
 
           case "h1":
+            node.text = node.text.toUpperCase();
             nextContext.childStyle = nextContext.childStyle.merge(
               TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
             );
             continue myDefault;
           case "h2":
+            node.text = node.text.toUpperCase();
             nextContext.childStyle = nextContext.childStyle.merge(
               TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             );
             continue myDefault;
           case "h3":
+            node.text = node.text.toUpperCase();
             nextContext.childStyle = nextContext.childStyle.merge(
               TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
             );
             continue myDefault;
           case "h4":
+            node.text = node.text.toUpperCase();
             nextContext.childStyle = nextContext.childStyle.merge(
               TextStyle(fontSize: 20.0, fontWeight: FontWeight.w100),
             );
             continue myDefault;
           case "h5":
+            node.text = node.text.toUpperCase();
             nextContext.childStyle = nextContext.childStyle.merge(
               TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             );
             continue myDefault;
           case "h6":
+            node.text = node.text.toUpperCase();
             nextContext.childStyle = nextContext.childStyle.merge(
               TextStyle(fontSize: 18.0, fontWeight: FontWeight.w100),
             );
