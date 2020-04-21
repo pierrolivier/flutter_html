@@ -998,7 +998,6 @@ class HtmlRichTextParser extends StatelessWidget {
                           bottom: 8.0,
                           left: parseContext.indentLevel * indentSize)
                   : EdgeInsets.zero,
-              padding: EdgeInsets.all(2.0),
               decoration: decoration,
               child: RichText(
                 textAlign: textAlign,
